@@ -19,17 +19,15 @@ export class App extends Component {
     filter: ''
   }
 
-  async componentDidMount() { 
-    const savedFilters = localStorage.getItem('contacts');
-    if (savedFilters !== '') {
-      this.setState({
-        contacts: JSON.parse(savedFilters),
-      });
+  async componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parseContacts = JSON.parse(contacts);
+    if (parseContacts) {
+      this.setState({ contacts: parseContacts });
     }
 
     try {
       this.setState({ loading: true, error: false });
-      
     } catch (error) {
       this.setState({ error: true });
     } finally {
